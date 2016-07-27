@@ -7,7 +7,8 @@
                     var lat = position.coords.latitude;
                     var lng = position.coords.longitude;
                     location.href = 'https://pokevision.com/#/@' + lat + ',' + lng;
-                });
+                },
+                function() { alert("位置情報取得に失敗しました"); });
             }
             else {
                 alert("位置情報を取得できません");
