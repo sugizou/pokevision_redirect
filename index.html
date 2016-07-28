@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="ja">
     <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script type="text/javascript">
             if (navigator.geolocation) {
+                var waitMessage = function() {
+                    var cnt = (new Date()).getSeconds() % 3;
+                    var dot = '';
+                    for (var i = 0; i <= cnt; i++) { dot = dot + '.'; }
+                    $('#message').text('wait' + dot);
+                };
+                setInterval(waitMessage, 1000);
+
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var lat = position.coords.latitude;
                     var lng = position.coords.longitude;
                     location.href = 'https://pokevision.com/#/@' + lat + ',' + lng;
                 },
-                function() { alert("位置情報取得に失敗しました"); });
+                function() { alert("failed to get the GPS."); });
             }
             else {
-                alert("位置情報を取得できません");
+                alert("cannot get the GPS.");
             }
         </script>
     </head>
     <body>
-        wait...
+        <noscript>Please allow javascript</noscript>
+        <div>
+            <p>
+                <span id="message"></span><a href=".">reload</a>
+            </p>
+        </div>
     </body>
 </html>
